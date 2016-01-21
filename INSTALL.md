@@ -91,6 +91,8 @@ The configuration template contains explanations about the options.
 
 The only two mandatory settings are `rev_dir` and `ethercalc_url`. EthercalcRevisionTool won't start if you don't set it!
 
+`prefix` is important too: if you want EthercalcRevisionTool to be reachable with `https://calc.example.org/ert`, you need to set `prefix` to `/ert`.
+
 ## Init files
 
 ### InitV
@@ -134,4 +136,35 @@ You need to change `EDIR` and `USER` in `/etc/default/ethercalc_revision_tool` t
 
 ```
 start ethercalc_revision_tool
+```
+
+## Nginx
+
+You need to update you nginx configuration in order to be able to add EthercalcRevisionTool to Ethercalc. Open your nginx configuration file for Ethercalc:
+
+```
+vim /etc/nginx/sites-enabled/ethercalc
+```
+
+Add this snippet (adapt it to your configuration, the `hypnotoad` and the `prefix` settings):
+
+```
+location /ert/{
+    proxy_pass  http://127.0.0.1:7979;
+
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    # We expect the downsteam servers to redirect to the right hostname, so don't do any rewrites here.
+    proxy_redirect     off;
+}
+```
+
+Test Nginx's configuration and reload it
+
+```
+nginx -t && nginx -s reload
 ```
