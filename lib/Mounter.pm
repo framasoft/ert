@@ -11,7 +11,7 @@ sub startup {
 
     my $config = $self->plugin('Config' =>
         {
-            file    => File::Spec->catfile($Bin, '..' ,'ethercalc_rev_tool.conf'),
+            file    => File::Spec->catfile($Bin, '..' ,'ethercalc_revision_tool.conf'),
             default => {
                 prefix => '/',
                 theme  => 'default',
