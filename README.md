@@ -10,7 +10,7 @@ If you want to work with us, **fork us on [git.framasoft.org](https://git.framas
 ![Français](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/20px-Flag_of_France.svg.png) **Framasoft utilise GitLab** pour le développement de ses logiciels libres. Nos dépôts Github ne sont que des mirroirs.
 Si vous souhaitez travailler avec nous, **forkez-nous sur [git.framasoft.org](https://git.framasoft.org)**. (l'inscription n'est pas nécessaire, vous pouvez vous connecter avec votre compte Github)
 
-## What does it do?
+## What does EthercalcRevisionTool do?
 
 It allows you to visualize old revisions of your calc (a calc is an [Ethercalc](https://ethercalc.org) spreadsheet) and restore it to the calc.
 

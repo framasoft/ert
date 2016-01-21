@@ -17,9 +17,9 @@
     # MANDATORY, no default, uncomment and set it!
     #rev_dir => '',
 
-    # The relative or absolute URL of the Ethercalc instance you want to restore the calcs to
+    # The absolute URL path of the Ethercalc instance you want to restore the calcs to
     # You can't set a full URL like 'https://ethercalc.org'
-    # Valid examples: '/calc', '../calc'
+    # Valid examples: '/calc', '/calc/', '/'
     # MANDATORY, no default, uncomment and set it!
     #ethercalc_url => '',
 

@@ -13,6 +13,8 @@ wget https://raw.githubusercontent.com/audreyt/ethercalc/master/misc/archive.ls 
 
 With this file, we can export revisions of all calcs in `static/history` directory of the Ethercalc directory.
 
+**Hint**: for the rest of this section, we'll suppose that you are in the `misc` directory of your Ethercalc installation directory.
+
 For this, we'll need `LiveScript` to be installed on your system:
 
 ```
@@ -44,6 +46,12 @@ Add (this is an example, adjust to your installation and needs):
 ```
 
 This will dump calcs revisions every ten minutes (only if the calc has changed since the last dumped revision).
+
+**Warning**: If you tested the export while being `root`, you'll need to change the permissions to allow the ethercalc's user to use that directory to export to it.
+
+```
+chown ethercalc: -R ../static/history
+```
 
 ## Prerequisites
 
