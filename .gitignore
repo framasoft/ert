@@ -1,0 +1,7 @@
+local/*
+ethercalc_revision_tool.conf
+*.swp
+script/hypnotoad.pid
+themes/*
+!themes/default
+!themes/default/*

@@ -1,0 +1,18 @@
+[Unit]
+Description=Restore your calc's old revisions
+Documentation=https://git.framasoft.org/framasoft/ethercalc_revision_tool
+Requires=network.target
+After=network.target
+
+[Service]
+Type=forking
+User=www-data
+RemainAfterExit=yes
+WorkingDirectory=/var/www/ethercalc_revision_tool/
+PIDFile=/var/www/ethercalc_revision_tool/script/hypnotoad.pid
+ExecStart=/usr/local/bin/carton exec hypnotoad script/ethercalc_revision_tool
+ExecStop=/usr/local/bin/carton exec hypnotoad -s script/ethercalc_revision_tool
+ExecReload=/usr/local/bin/carton exec hypnotoad script/ethercalc_revision_tool
+
+[Install]
+WantedBy=multi-user.target

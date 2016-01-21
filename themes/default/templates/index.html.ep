@@ -1,0 +1,97 @@
+% # vim:set sw=4 ts=4 sts=4 ft=html.epl expandtab:
+<nav class="cyan">
+    <div class="nav-wrapper container">
+        <a href="<%= url_for('/') %>" class="brand-logo"><%= $calc %></a>
+    </div>
+</nav>
+% if ($msg) {
+    <div class="col s12">
+        <div class="card pink">
+            <div class="card-content white-text">
+                <strong><%= $msg %></strong>
+            </div>
+        </div>
+    </div>
+% } else {
+    <i id="ask" class="hide mdi-action-history medium green lighten-3 white-text" onclick="ask();"></i>
+    <ul class="collapsible popout" data-collapsible="accordion">
+        % for my $rev (@{$revs}) {
+        <li>
+            <div class="collapsible-header collapsible-link" data-rev="<%= $rev %>"><%= $rev %></div>
+            <div class="calc-content collapsible-body" style="padding: 10px;"><p>lorem</p></div>
+        </li>
+        % }
+    </ul>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h4><%= l('Replace actual version of %1', $calc) %></h4>
+            <p><%== l('Are you sure you want to replace actual version of %1 with the version <span id="rev"></span>?', $calc) %></p>
+        </div>
+        <div class="modal-footer">
+            <a id="do-it" href="#" class=" modal-action modal-close waves-effect waves-green btn-flat"><%= l('Yes') %></a>
+            <a onclick="closeMod();" href="#" class=" modal-action modal-close waves-effect waves-green btn-flat"><%= l('Cancel') %></a>
+        </div>
+    </div>
+    %= javascript '/js/moment-with-locales.min.js'
+    %= javascript '/js/SocialCalcModule.js'
+    %= javascript begin
+    $(document).ready(function(){
+        $('.collapsible').click(function() {
+            if ($(this).find('.active').length === 0) {
+                $('#ask').addClass('hide');
+            } else {
+                $('#ask').removeClass('hide');
+            }
+        });
+        $('.collapsible-link').each(function() {
+            var e = $(this);
+            e.html(moment.unix(e.attr('data-rev')).locale(window.navigator.language).format('LLLL')+'<i class="mdi-action-visibility small"></i>');
+            e.click(function() {
+                $.ajax('<%= url_for('rev') %>'+e.attr('data-rev'), {
+                    method: 'GET',
+                    success: function(data, textStatus, jqXHR) {
+                        var s = new SocialCalc.Sheet();
+                        s.ParseSheetSave(data);
+                        context=new SocialCalc.RenderContext(s);
+                        e.parent().children('.calc-content').each(function(index) {
+                            var table = context.RenderSheet(null, context.defaultHTMLlinkstyle);
+                            $(table).addClass('responsive-table');
+                            $(table).attr('style', null);
+                            $(this).html(table);
+                        })
+                    }
+                });
+            });
+        });
+    });
+    function ask() {
+        e = $('.collapsible-header.active');
+        $('#rev').text('"'+moment.unix(e.attr('data-rev')).locale(window.navigator.language).format('LLLL')+'"');
+        $('#do-it').unbind('click');
+        $('#do-it').click(function() {
+            backintime(e.attr('data-rev'));
+        });
+        $('#modal').openModal();
+    }
+    function closeMod() {
+        $('#modal').closeModal();
+    }
+    function backintime(rev) {
+        $.ajax('<%= url_for('backintime') %>', {
+            method: 'POST',
+            data: {
+                calc: '<%= $calc %>',
+                revision: rev,
+            },
+            dataType: 'json',
+            success: function(data, textStatus, jqXHR) {
+                if (data.success) {
+                    Materialize.toast('<%= l('The calc has been replaced by the selected version') %>', 4000, 'cyan');
+                } else {
+                    Materialize.toast(data.msg, 4000, 'pink white-text');
+                }
+            }
+        });
+    }
+    % end
+% }

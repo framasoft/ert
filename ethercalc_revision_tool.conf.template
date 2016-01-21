@@ -1,0 +1,44 @@
+# vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
+{
+    ####################
+    # Hypnotoad settings
+    ####################
+    # see http://mojolicio.us/perldoc/Mojo/Server/Hypnotoad for a full list of settings
+    hypnotoad => {
+        # array of IP addresses and ports you want to listen to
+        listen => ['http://127.0.0.1:8080'],
+        # if you use EthercalcRevisionTool behind a reverse proxy like Nginx, you want ro set proxy to 1
+        # if you use EthercalcRevisionTool directly, let it commented
+        #proxy  => 1,
+    },
+
+    # The directory where the revisions, extracted with `archive.ls` provided by ethercalc, are stored.
+    # This can be an absolute path or a relative one (relative to this ERT installation directory)
+    # MANDATORY, no default, uncomment and set it!
+    #rev_dir => '',
+
+    # The relative or absolute URL of the Ethercalc instance you want to restore the calcs to
+    # You can't set a full URL like 'https://ethercalc.org'
+    # Valid examples: '/calc', '../calc'
+    # MANDATORY, no default, uncomment and set it!
+    #ethercalc_url => '',
+
+    # array of random strings used to encrypt cookies
+    # optional, default is ['fdjsofjoihrei'], PLEASE, CHANGE IT
+    #secrets        => ['fdjsofjoihrei'],
+
+    # choose a theme. See the available themes in `themes` directory
+    # optional, default is 'default'
+    #theme         => 'default',
+
+    # if you want to have piwik statistics, provide a piwik image tracker
+    # only the image tracker is allowed, no javascript
+    # optional, no default
+    #piwik_img         => 'https://piwik.example.org/piwik.php?idsite=1&amp;rec=1',
+
+    # URL sub-directory in which you want EthercalcRevisionTool to be accessible
+    # example: you want to have EthercalcRevisionTool under https://example.org/ert/
+    # => set prefix to '/ert' or to '/ert/', it doesn't matter
+    # optional, defaut is /
+    #prefix        => '/',
+};

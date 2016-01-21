@@ -1,0 +1,7 @@
+# EDIR is the path where you installed EthercalcRevisionTool
+# It has to end with a final /
+EDIR=/var/www/ethercalc_revision_tool/
+
+# USER is the user who will launch EthercalcRevisionTool
+# Best shot is to choose the same use as the one which owns the calc's history directory
+USER=www-data
