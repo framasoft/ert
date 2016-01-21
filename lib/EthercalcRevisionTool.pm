@@ -137,9 +137,10 @@ sub startup {
 
             my $comp    = (substr($self->config('ethercalc_url'), -1, 1) eq '/') ? '_/' : '/_/';
 
-            my $url     = $c->req->url->clone;
+            my $url     = Mojo::URL->new($c->req->url->to_abs->to_string);
             $c->debug($url->to_abs);
             $url->path($self->config('ethercalc_url').$comp.$calc);
+            $url->scheme($c->req->headers->header('X-Forwarded-Proto'));
             $c->debug($url->to_abs->to_string);
 
             my $tx = $c->ua->put($url => $content);

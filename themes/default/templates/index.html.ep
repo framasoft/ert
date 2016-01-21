@@ -77,7 +77,7 @@
         $('#modal').closeModal();
     }
     function backintime(rev) {
-        $.ajax('<%= url_for('backintime') %>', {
+        $.ajax('<%= (substr(url_for('backintime'), -1, 1) eq '/') ? url_for('backintime') : url_for('backintime').'/'  %>', {
             method: 'POST',
             data: {
                 calc: '<%= $calc %>',
