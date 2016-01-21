@@ -1,6 +1,6 @@
 [Unit]
 Description=Restore your calc's old revisions
-Documentation=https://git.framasoft.org/framasoft/ethercalc_revision_tool
+Documentation=https://git.framasoft.org/framasoft/ert
 Requires=network.target
 After=network.target
 
