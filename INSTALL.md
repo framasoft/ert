@@ -149,8 +149,8 @@ vim /etc/nginx/sites-enabled/ethercalc
 Add this snippet (adapt it to your configuration, the `hypnotoad` and the `prefix` settings):
 
 ```
-location /ert/{
-    proxy_pass  http://127.0.0.1:7979;
+location ^~ /ert/ {
+    proxy_pass  http://127.0.0.1:8080;
 
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
