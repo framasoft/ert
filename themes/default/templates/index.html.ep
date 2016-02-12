@@ -18,7 +18,7 @@
         % for my $rev (@{$revs}) {
         <li>
             <div class="collapsible-header collapsible-link" data-rev="<%= $rev %>"><%= $rev %></div>
-            <div class="calc-content collapsible-body" style="padding: 10px;"><p>lorem</p></div>
+            <div class="calc-content collapsible-body" style="padding: 10px;"><p></p></div>
         </li>
         % }
     </ul>

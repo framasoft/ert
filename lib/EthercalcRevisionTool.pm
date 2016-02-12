@@ -1,7 +1,7 @@
 # vim:set sw=4 ts=4 sts=4 ft=perl expandtab:
 package EthercalcRevisionTool;
 use Mojo::Base 'Mojolicious';
-use Mojo::Util qw(slurp);
+use Mojo::Util qw(slurp url_escape);
 use Mojo::JSON qw(true false);
 use Mojo::URL;
 use File::Spec;
@@ -51,9 +51,9 @@ sub startup {
     my $r = $self->routes;
 
     # Displaying revisions
-    $r->get('/:calc' => sub {
+    $r->get('/#calc' => sub {
         my $c    = shift;
-        my $calc = $c->param('calc');
+        my $calc = url_escape($c->param('calc'));
         my $dir  = File::Spec->catdir(($c->config('rev_dir'), $calc));
 
         my ($msg, @revs);
@@ -80,9 +80,9 @@ sub startup {
     })->name('index');
 
     # Get the raw revision file
-    $r->get('/rev/:calc/:revision' => sub {
+    $r->get('/rev/#calc/:revision' => sub {
         my $c       = shift;
-        my $calc    = $c->param('calc');
+        my $calc    = url_escape($c->param('calc'));
         my $rev     = $c->param('revision');
 
         my $file    = File::Spec->catfile(($c->config('rev_dir'), $calc, $rev.'.txt'));
@@ -104,7 +104,7 @@ sub startup {
     })->name('rev');
 
     # Check if a revision exists for a calc
-    $r->get('/rev_exists/:calc' => sub {
+    $r->get('/rev_exists/#calc' => sub {
         my $c    = shift;
         my $calc = $c->param('calc');
 
@@ -126,11 +126,11 @@ sub startup {
         my $calc = $c->param('calc');
         my $rev  = $c->param('revision');
 
-        my $file    = File::Spec->catfile(($c->config('rev_dir'), $calc, $rev.'.txt'));
+        my $file    = File::Spec->catfile(($c->config('rev_dir'), url_escape($calc), $rev.'.txt'));
 
         my $success = false;
-        my $msg     = $c->l('The revision %1 of the calc %2 doesn\'t seems to exist.', $rev, $calc) unless (-e $file);
-        $msg        = $c->l('Unable to read the revision %1 of the calc %2.', $rev, $calc) unless (-r $file);
+        my $msg     = $c->l('The revision %1 of the calc %2 doesn\'t seems to exist.', $rev, url_escape($calc)) unless (-e $file);
+        $msg        = $c->l('Unable to read the revision %1 of the calc %2.', $rev, url_escape($calc)) unless (-r $file);
 
         unless (defined($msg)) {
             my $content = slurp($file) unless (defined($msg));
@@ -148,7 +148,7 @@ sub startup {
                 $success = true;
             } else {
                 my $error = (defined $tx->error->{code}) ? $c->l('Code: %1<br>%2', $tx->error->{code}, $tx->error->{message}) : $tx->error->{message};
-                $msg = $c->l('Something went wrong when trying to restore %1 on calc %2:<br>%3', $rev, $calc, $error);
+                $msg = $c->l('Something went wrong when trying to restore %1 on calc %2:<br>%3', $rev, url_escape($calc), $error);
             }
         }
 
