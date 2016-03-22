@@ -18,7 +18,8 @@ With this file, we can export revisions of all calcs in `static/history` directo
 For this, we'll need `LiveScript` to be installed on your system:
 
 ```
-npm install -g LiveScript
+npm install -g livescript
+test -e /usr/local/bin/lsc || ln -s /usr/lib/node_modules/livescript/bin/lsc /usr/local/bin/lsc
 ```
 
 Then, we can export the calcs:
