@@ -143,7 +143,7 @@ sub startup {
             $url->scheme($c->req->headers->header('X-Forwarded-Proto'));
             $c->debug($url->to_abs->to_string);
 
-            my $tx = $c->ua->put($url => $content);
+            my $tx = $c->ua->put($url => { 'Content-Type' => 'text/x-socialcalc' } => $content);
             if ($tx->success) {
                 $success = true;
             } else {
