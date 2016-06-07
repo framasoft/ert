@@ -2,6 +2,10 @@
 <nav class="cyan">
     <div class="nav-wrapper container">
         <a href="<%= url_for('/') %>" class="brand-logo"><%= $calc %></a>
+        <a onclick="window.close();" class="right" href="#">
+            <i class="mdi-content-clear"></i>
+        </a>
+
     </div>
 </nav>
 % if ($msg) {
