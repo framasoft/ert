@@ -71,7 +71,7 @@ cpan Carton
 ## Get EthercalcRevisionTool
 
 ```
-git clone https://git.framasoft.org/framasoft/ert.git
+git clone https://framagit.org/framasoft/ert.git
 ```
 
 ## Install dependencies
