@@ -172,7 +172,7 @@ nginx -t && nginx -s reload
 
 ## Ethercalc integration
 
-In order to have a "Go to old revisions" button in your calcs, add this to Ethercalc's `start.html` (of course, adapt it to your `prefix` setting and your language):
+In order to have a "Go to old revisions" button in your calcs, add this to Ethercalc's `index.html` (of course, adapt it to your `prefix` setting and your language):
 
 ```
 function calc_exists() {
