@@ -50,8 +50,10 @@
         $('.collapsible-link').each(function() {
             var e = $(this);
             e.html(moment.unix(e.attr('data-rev')).locale(window.navigator.language).format('LLLL')+'<i class="mdi-action-visibility small"></i>');
+% my $url = url_for('rev');
+%    $url =~ s/'/\\'/g;
             e.click(function() {
-                $.ajax('<%= url_for('rev') %>'+e.attr('data-rev'), {
+                $.ajax('<%== $url %>'+e.attr('data-rev'), {
                     method: 'GET',
                     success: function(data, textStatus, jqXHR) {
                         var s = new SocialCalc.Sheet();

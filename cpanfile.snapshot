@@ -46,6 +46,22 @@ DISTRIBUTIONS
       IO::Socket 0
       Socket 1.97
       Test::More 0.88
+  IO-Socket-SSL-2.047
+    pathname: S/SU/SULLR/IO-Socket-SSL-2.047.tar.gz
+    provides:
+      IO::Socket::SSL 2.047
+      IO::Socket::SSL::Intercept 2.014
+      IO::Socket::SSL::OCSP_Cache 2.047
+      IO::Socket::SSL::OCSP_Resolver 2.047
+      IO::Socket::SSL::PublicSuffix undef
+      IO::Socket::SSL::SSL_Context 2.047
+      IO::Socket::SSL::SSL_HANDLE 2.047
+      IO::Socket::SSL::Session_Cache 2.047
+      IO::Socket::SSL::Utils 2.014
+    requirements:
+      ExtUtils::MakeMaker 0
+      Net::SSLeay 1.46
+      Scalar::Util 0
   Locale-Maketext-Lexicon-1.00
     pathname: D/DR/DRTECH/Locale-Maketext-Lexicon-1.00.tar.gz
     provides:
@@ -256,6 +272,16 @@ DISTRIBUTIONS
       Mojolicious 5
       Test::More 0
       perl 5.010001
+  Net-SSLeay-1.81
+    pathname: M/MI/MIKEM/Net-SSLeay-1.81.tar.gz
+    provides:
+      Net::SSLeay 1.81
+      Net::SSLeay::Handle 0.61
+    requirements:
+      ExtUtils::MakeMaker 6.36
+      MIME::Base64 0
+      Test::More 0.60_01
+      perl 5.005
   common-sense-3.74
     pathname: M/ML/MLEHMANN/common-sense-3.74.tar.gz
     provides:
